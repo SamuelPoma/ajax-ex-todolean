@@ -1,6 +1,7 @@
 $(document).ready(function(){
   // Con questa chiamata AJAX, col metodo get prendo gli elementi della lista salvati nel server
   // e appendo e li stampo sul dom
+
   $.ajax({
       url:"http://138.68.64.12:3005/todo/",
       method:"GET",
@@ -89,7 +90,7 @@ $(document).ready(function(){
           },
           success:function(data) {
               $(".wishlist").html('<li class = wishlist-item>' + data.text +
-                
+
                '</li>');
           },
       });

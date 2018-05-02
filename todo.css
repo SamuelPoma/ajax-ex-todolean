@@ -19,12 +19,15 @@ header h1 {
 .wishlist .wishlist-item {
   font-size: 2em;
   padding-left: 25px;
+  color: #1a6aad;
+  list-style-type: none;
 }
 
 .container-operation {
   margin-top: 25px;
   text-align: center;
 }
+
 .container-operation input, .container-operation button {
   background-color: #fffde4;
   color: #1a6aad;
@@ -37,10 +40,17 @@ header h1 {
   cursor: pointer;
 }
 
+.container-wishlist {
+  margin-top: 5%;
+  text-align: center;
+}
+
 .wishlist-item .far.fa-trash-alt, .wishlist-item .far.fa-plus-square {
+  color: #1a6aad;
   padding-left: 15px;
   display: none;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .modify-wish-container {
