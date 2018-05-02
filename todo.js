@@ -9,8 +9,8 @@ $(document).ready(function(){
           console.log(data)
           $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
               '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
-              '<i class="far fa-plus-square"></i>' +
-          '</ul>')
+              '<i class="far fa-plus-square" id ="'+ data[i].id + '">' + '</i>' +
+          '</li>')
         }
       },
   });
@@ -29,7 +29,8 @@ $(document).ready(function(){
             console.log(data)
             $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
                 '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
-             '</ul>')
+                '<i class="far fa-plus-square" id ="'+ data[i].id + '">' + '</i>' +
+             '</li>')
           }
         },
     });
@@ -48,14 +49,14 @@ $(document).ready(function(){
   });
 
   $(document).on("click",".far.fa-trash-alt",function(){
-    currentWishItem = $(this);
+    currentDeleteWishItem = $(this);
     var currentId= $(this).attr("id");
     console.log(currentId)
     $.ajax({
         url:"http://138.68.64.12:3005/todo/"+currentId ,
         method:"DELETE",
         success:function(data) {
-          currentWishItem.parent().remove();
+          currentDeleteWishItem.parent().remove();
         },
     });
   });
@@ -72,5 +73,28 @@ $(document).ready(function(){
     currentIcon.hide();
   });
 
+  $(document).on("click",".far.fa-plus-square",function(){
+    $(".modify-wish-container").show();
+    currentModifyWishItem = $(this);
+    var currentId= $(this).attr("id");
+    var input = $("#modify-wish-input").val();
+    $(document).on("click","#btn-modify-wish",function(){
+      console.log(input);
+      $.ajax({
+          url:"http://138.68.64.12:3005/todo/"+currentId ,
+          method:"PUT",
+          data:
+          {
+            "text" : input,
+          },
+          success:function(data) {
+              $(".wishlist").append('<li class = wishlist-item>' + data.text +
+                  '<i class="far fa-trash-alt" id ="' + data.id + '">' + '</i>' +
+                  '<i class="far fa-plus-square" id ="'+ data.id + '">' + '</i>' +
+               '</li>')
+          },
+      });
+    });
+  });
 
 });

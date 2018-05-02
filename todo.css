@@ -42,3 +42,8 @@ header h1 {
   display: none;
   cursor: pointer;
 }
+
+.modify-wish-container {
+  margin-top: 15px;
+  display: none;
+}
