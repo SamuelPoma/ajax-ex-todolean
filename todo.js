@@ -8,7 +8,7 @@ $(document).ready(function(){
         for (var i = 0; i < data.length; i++) {
           console.log(data)
           $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
-              '<i class="far fa-trash-alt"></i>' +
+              '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
           '</ul>')
         }
       },
@@ -26,8 +26,9 @@ $(document).ready(function(){
         success:function(data) {
           for (var i = 0; i < data.length; i++) {
             console.log(data)
+
             $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
-                '<i class="far fa-trash-alt"></i>' +
+                '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
              '</ul>')
           }
         },
@@ -43,6 +44,19 @@ $(document).ready(function(){
   $(document).on("mouseleave",".wishlist-item",function(){
     var currentIcon= $(this).find(".far.fa-trash-alt");
     currentIcon.hide();
-});
+  });
+
+  $(document).on("click",".far.fa-trash-alt",function(){
+    currentWishItem = $(this);
+    var currentId= $(this).attr("id");
+    console.log(currentId)
+    $.ajax({
+        url:"http://138.68.64.12:3005/todo"+"/"+currentId ,
+        method:"DELETE",
+        success:function(data) {
+          currentWishItem.parent().remove();
+        },
+    });
+  });
 
 });
