@@ -7,7 +7,9 @@ $(document).ready(function(){
       success:function(data) {
         for (var i = 0; i < data.length; i++) {
           console.log(data)
-          $(".wishlist").append('<li class = wishlist-item>' + data[i].text + '</ul>')
+          $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
+              '<i class="far fa-trash-alt"></i>' +
+          '</ul>')
         }
       },
   });
@@ -21,14 +23,26 @@ $(document).ready(function(){
           {
             "text" : $("#wish-input").val()
           },
-
         success:function(data) {
           for (var i = 0; i < data.length; i++) {
             console.log(data)
-            $(".wishlist").append('<li class = wishlist-item>' + data[i].text + '</ul>')
+            $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
+                '<i class="far fa-trash-alt"></i>' +
+             '</ul>')
           }
         },
     });
   });
+  // creo due eventi in cui andando su ogni wishlist item appare un'icona cestino
+  // sulla quale sarà possibile cliccare per eliminare il messaggio
+  $(document).on("mouseenter",".wishlist-item",function(){
+    var currentIcon= $(this).find(".far.fa-trash-alt");
+    currentIcon.show();
+  });
+
+  $(document).on("mouseleave",".wishlist-item",function(){
+    var currentIcon= $(this).find(".far.fa-trash-alt");
+    currentIcon.hide();
+});
 
 });

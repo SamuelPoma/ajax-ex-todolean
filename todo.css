@@ -36,3 +36,10 @@ header h1 {
 .container-operation button {
   cursor: pointer;
 }
+
+.wishlist-item .far.fa-trash-alt {
+  padding-left: 15px;
+  display: none;
+  cursor: pointer;
+
+}
