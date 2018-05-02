@@ -77,8 +77,8 @@ $(document).ready(function(){
     $(".modify-wish-container").show();
     currentModifyWishItem = $(this);
     var currentId= $(this).attr("id");
-    var input = $("#modify-wish-input").val();
     $(document).on("click","#btn-modify-wish",function(){
+      var input = $("#modify-wish-input").val();
       console.log(input);
       $.ajax({
           url:"http://138.68.64.12:3005/todo/"+currentId ,
@@ -88,10 +88,9 @@ $(document).ready(function(){
             "text" : input,
           },
           success:function(data) {
-              $(".wishlist").append('<li class = wishlist-item>' + data.text +
-                  '<i class="far fa-trash-alt" id ="' + data.id + '">' + '</i>' +
-                  '<i class="far fa-plus-square" id ="'+ data.id + '">' + '</i>' +
-               '</li>')
+              $(".wishlist").html('<li class = wishlist-item>' + data.text +
+                
+               '</li>');
           },
       });
     });
