@@ -9,6 +9,7 @@ $(document).ready(function(){
           console.log(data)
           $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
               '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
+              '<i class="far fa-plus-square"></i>' +
           '</ul>')
         }
       },
@@ -26,7 +27,6 @@ $(document).ready(function(){
         success:function(data) {
           for (var i = 0; i < data.length; i++) {
             console.log(data)
-
             $(".wishlist").append('<li class = wishlist-item>' + data[i].text +
                 '<i class="far fa-trash-alt" id ="' + data[i].id + '">' + '</i>' +
              '</ul>')
@@ -35,7 +35,8 @@ $(document).ready(function(){
     });
   });
   // creo due eventi in cui andando su ogni wishlist item appare un'icona cestino
-  // sulla quale sarà possibile cliccare per eliminare il messaggio
+  // sulla quale sarà possibile cliccare per eliminare il messaggio in maniera
+  // permanente mediante una chiamata AJAX con metodo DELETE
   $(document).on("mouseenter",".wishlist-item",function(){
     var currentIcon= $(this).find(".far.fa-trash-alt");
     currentIcon.show();
@@ -51,12 +52,25 @@ $(document).ready(function(){
     var currentId= $(this).attr("id");
     console.log(currentId)
     $.ajax({
-        url:"http://138.68.64.12:3005/todo"+"/"+currentId ,
+        url:"http://138.68.64.12:3005/todo/"+currentId ,
         method:"DELETE",
         success:function(data) {
           currentWishItem.parent().remove();
         },
     });
   });
+  // creo due eventi in cui andando su ogni wishlist item appare un'icona add(plus)
+  // sulla quale sarà possibile cliccare per modificare il messaggio in maniera
+  // permanente mediante una chiamata AJAX con metodo PUT
+  $(document).on("mouseenter",".wishlist-item",function(){
+    var currentIcon= $(this).find(".far.fa-plus-square");
+    currentIcon.show();
+  });
+
+  $(document).on("mouseleave",".wishlist-item",function(){
+    var currentIcon= $(this).find(".far.fa-plus-square");
+    currentIcon.hide();
+  });
+
 
 });

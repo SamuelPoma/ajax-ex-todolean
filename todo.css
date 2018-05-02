@@ -37,9 +37,8 @@ header h1 {
   cursor: pointer;
 }
 
-.wishlist-item .far.fa-trash-alt {
+.wishlist-item .far.fa-trash-alt, .wishlist-item .far.fa-plus-square {
   padding-left: 15px;
   display: none;
   cursor: pointer;
-
 }
